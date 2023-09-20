@@ -1,0 +1,35 @@
+
+PROJEKT TEST
+
+ANBEFALET FREMGANGSMÅDE
+    1: Realisér systemet
+    2: Lav testspecifikation til UC: Opret ordination
+    3: Realisér unittests via JUnit.
+
+LÆS OP:
+    Ækvivalensklasser
+        At kunne finde ækvivalensklasser med baggrund i metoders signatur med blackbox-teknikken
+        At kunne bestemme konkrete testdata med baggrund i fundne ækvivalensklasser samt grænseværdier
+            (når det giver mening)
+        At kunne specificere en test med baggrund i en use case-specifikatio
+
+
+DELE AF KLASSEDIAGRAMMET ER ALLEREDE REALISERET:
+    Dosis
+    Lægemiddel
+    Patient
+    Storage
+
+CHECKLIST:
+    PATIENT                             DONE
+    LÆGEMIDDEL                          DONE
+    ORDINATION                          DONE
+        DAGLIGFAST                      DONE
+        DAGLIGSLÆV                      DONE
+            DOSIS                       DONE
+        PN
+
+TASK
+    Check attributter og links
+
+

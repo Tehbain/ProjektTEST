@@ -22,3 +22,13 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+
+# DATAMATIKER, alt over er fra en Git template
+# Default ignored files
+# SLETTET
+# Git og IntelliJ opsætning, PRO2
+out/
+.idea/
+*.iml
+
