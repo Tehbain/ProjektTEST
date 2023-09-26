@@ -29,6 +29,10 @@ public class DagligSkæv extends Ordination {
         this.dosis = (ArrayList<Dosis>) dosis;
     }
 
+    public ArrayList<Dosis> getDosis() {
+        return dosis;
+    }
+
     public void opretDosis(LocalTime tid, double antal) {
         this.dosis.add( new Dosis(tid, antal));
     }

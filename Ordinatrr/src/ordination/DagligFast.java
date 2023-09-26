@@ -18,6 +18,10 @@ public class DagligFast extends Ordination {
     /** Ass. 0..4 Dosis */
     private Dosis[] dosis = new Dosis[4];
 
+    public Dosis[] getDosis() {
+        return dosis;
+    }
+
     public DagligFast(LocalDate startDen, LocalDate slutDen, Lægemiddel lægemiddel) {
         super(startDen, slutDen, lægemiddel);
     }
@@ -25,6 +29,18 @@ public class DagligFast extends Ordination {
         super(startDen, slutDen, lægemiddel);
         this.dosis = dosis;
     }
+
+    public DagligFast(
+            LocalDate startDato, LocalDate slutDato, Lægemiddel lægemiddel,
+            double morgenAntal, double middagAntal, double aftenAntal, double natAntal) {
+        super(startDato,slutDato,lægemiddel);
+        this.dosis = new Dosis[]{
+                  new Dosis(startDato.atStartOfDay().plusHours(8).toLocalTime(),  morgenAntal)
+                , new Dosis(startDato.atStartOfDay().plusHours(12).toLocalTime(), middagAntal)
+                , new Dosis(startDato.atStartOfDay().plusHours(18).toLocalTime(), aftenAntal)
+                , new Dosis(startDato.atStartOfDay().plusHours(24).toLocalTime(), natAntal)};
+    } //TODO
+
 
     public void addDosis(Dosis dosis, int MorMiAftNat) {
         this.dosis[MorMiAftNat] = dosis;

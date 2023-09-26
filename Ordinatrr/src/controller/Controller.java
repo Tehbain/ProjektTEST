@@ -2,6 +2,7 @@ package controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import ordination.*;
@@ -14,15 +15,25 @@ public abstract class Controller {
         Controller.storage = storage;
     }
 
+
     /**
      * Opret og returner en PN ordination.
      * Hvis startDato er efter slutDato, kastes en IllegalArgumentException,
      * og ordinationen oprettes ikke.
      * Pre: antal > 0.
      */
-    public static PN opretPNOrdination(
-            LocalDate startDato, LocalDate slutDato, Patient patient, Lægemiddel lægemiddel,
-            double antal) {
+    public static PN opretPNOrdination(LocalDate startDato, LocalDate slutDato, Patient patient, Lægemiddel lægemiddel, double antal) {
+        try {
+            if (startDato.isAfter(slutDato)) {
+                throw new IllegalArgumentException("Vend lige din dato om, makker.");
+            } else {
+                PN PNret =  new PN(startDato,slutDato,lægemiddel);
+                patient.addOrdination(PNret);
+                return PNret;
+
+            }
+        }catch (IllegalArgumentException e){
+        }
 
         return null;
     }
@@ -36,6 +47,18 @@ public abstract class Controller {
     public static DagligFast opretDagligFastOrdination(
             LocalDate startDato, LocalDate slutDato, Patient patient, Lægemiddel lægemiddel,
             double morgenAntal, double middagAntal, double aftenAntal, double natAntal) {
+
+        try {
+            if (startDato.isAfter(slutDato)) {
+                throw new IllegalArgumentException("Du lader til at have problemer. Prøv igen.");
+            } else {
+                DagligFast DFret = new DagligFast(startDato,slutDato, lægemiddel);
+                patient.addOrdination(DFret);
+                return DFret;
+            }
+
+        } catch (IllegalArgumentException e) {
+        }
 
         return null;
     }
@@ -52,6 +75,24 @@ public abstract class Controller {
             LocalDate startDen, LocalDate slutDen, Patient patient, Lægemiddel lægemiddel,
             LocalTime[] klokkeSlet, double[] antalEnheder) {
 
+        try {
+
+            if (startDen.isAfter(slutDen)) {
+                throw new IllegalArgumentException("Vi må simpelthen holde op med at mødes på den her måde");
+            }
+            if (klokkeSlet.length != antalEnheder.length) {
+                throw new IllegalArgumentException("Nope");
+            }
+            else {
+                DagligSkæv DSret = new DagligSkæv(startDen,slutDen,lægemiddel);
+                patient.addOrdination(DSret);
+                return DSret;
+            }
+
+        }catch (IllegalArgumentException e) {
+
+        }
+
         return null;
     }
 
@@ -61,7 +102,17 @@ public abstract class Controller {
      * kastes en IllegalArgumentException.
      */
     public static void ordinationPNAnvendt(PN ordination, LocalDate dato) {
+        try {
 
+            if (dato.isBefore(ordination.getStartDen()) || dato.isAfter(ordination.getSlutDen())) {
+                throw new IllegalArgumentException("Det kan du godt gøre bedre, ik'?");
+            } else {
+                ordination.givDosis(dato);
+            }
+
+        }catch (IllegalArgumentException e) {
+
+        }
     }
 
     /**
@@ -70,14 +121,36 @@ public abstract class Controller {
      */
     public static double anbefaletDosisPrDoegn(Patient patient, Lægemiddel lægemiddel) {
 
-        return 0;
+        double anbefalet = 0;
+        double vægt = patient.getVægt();
+
+        if (vægt < 25) {
+            return lægemiddel.getEnhedPrKgPrDoegnLet();
+        } else if (vægt > 120) {
+            return lægemiddel.getEnhedPrKgPrDoegnTung();
+        } else return lægemiddel.getEnhedPrKgPrDoegnNormal();
+
+
     }
 
     /** Returner antal ordinationer for det givne vægtinterval og det givne lægemiddel. */
     public static int antalOrdinationerPrVaegtPrLaegemiddel(
             double vaegtStart, double vaegtSlut, Lægemiddel lægemiddel) {
 
-        return 0;
+        int countOrdinationer = 0;
+
+        ArrayList<Patient> patienter = new ArrayList<>(storage.getAllPatienter());
+
+        for (Patient patient : patienter) {
+            for (Ordination ordination : patient.getOrdinationer()) {
+                if (patient.getVægt() > vaegtStart && patient.getVægt() < vaegtSlut
+                        && ordination.getLægemiddel().equals(lægemiddel)) {
+                    countOrdinationer++;
+                }
+            }
+        }
+
+        return countOrdinationer;
     }
 
     public static List<Patient> getAllPatienter() {
@@ -132,7 +205,7 @@ public abstract class Controller {
         opretPNOrdination(LocalDate.parse("2019-01-20"), LocalDate.parse("2019-01-25"),
                 ib, fucidin, 5);
 
-        opretPNOrdination(LocalDate.parse("2019-01-01"), LocalDate.parse("2019.01-12"),
+        opretPNOrdination(LocalDate.parse("2019-01-01"), LocalDate.parse("2019-01-12"),
                 jane, paracetamol, 123);
 
         opretDagligFastOrdination(LocalDate.parse("2019-01-10"), LocalDate.parse("2019-01-12"),

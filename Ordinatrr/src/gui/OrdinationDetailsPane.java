@@ -106,9 +106,9 @@ public class OrdinationDetailsPane extends GridPane {
         txtDosis.setText(pn.getAntalEnheder() + "");
 
         txtDoegndosis.setText(pn.doegnDosis() + " "
-            + pn.getLaegemiddel().getEnhed());
+            + pn.getLægemiddel().getEnhed());
         txtTotalDosis.setText(pn.samletDosis() + " "
-            + pn.getLaegemiddel().getEnhed());
+            + pn.getLægemiddel().getEnhed());
     }
 
     public void clear() {
@@ -125,9 +125,9 @@ public class OrdinationDetailsPane extends GridPane {
 
     public void setOrdination(Ordination ordination) {
         txtType.setText(ordination.getType());
-        txtStarttid.setText(ordination.getStartDato().toString());
-        txtSluttid.setText(ordination.getSlutDato().toString());
-        txtLaegemiddel.setText(ordination.getLaegemiddel().toString());
+        txtStarttid.setText(ordination.getStartDen().toString());
+        txtSluttid.setText(ordination.getSlutDen().toString());
+        txtLaegemiddel.setText(ordination.getLægemiddel().toString());
         txtDoegndosis.setText(ordination.doegnDosis() + "");
         txtTotalDosis.setText(ordination.samletDosis() + "");
     }
@@ -151,7 +151,7 @@ public class OrdinationDetailsPane extends GridPane {
     public void setSkaev(DagligSkæv skaev) {
         textAreaSkaev.clear();
         this.add(textAreaSkaev, 0, 6, 2, 1);
-        for (Dosis d : skaev.getDoser()) {
+        for (Dosis d : skaev.getDosis()) {
             textAreaSkaev.appendText(d.toString() + "\n");
         }
     }

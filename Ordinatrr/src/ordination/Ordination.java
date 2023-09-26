@@ -40,4 +40,8 @@ public abstract class Ordination {
 
     /** Returner ordinationstypen som en String. */
     public abstract String getType();
+
+    public Lægemiddel getLægemiddel() {
+        return lægemiddel;
+    }
 }

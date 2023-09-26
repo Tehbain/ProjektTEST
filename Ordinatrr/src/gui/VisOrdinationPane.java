@@ -44,9 +44,9 @@ public class VisOrdinationPane extends GridPane {
             ordinationDetailsPane.clear();
             ordinationDetailsPane.setOrdination(ordination);
             if (ordination instanceof DagligFast dagligFast) {
-                ordinationDetailsPane.setFast(dagligFast.getDoser()[0],
-                        dagligFast.getDoser()[1], dagligFast.getDoser()[2],
-                        dagligFast.getDoser()[3]);
+                ordinationDetailsPane.setFast(dagligFast.getDosis()[0],
+                        dagligFast.getDosis()[1], dagligFast.getDosis()[2],
+                        dagligFast.getDosis()[3]);
             } else if (ordination instanceof DagligSkæv) {
                 ordinationDetailsPane.setSkaev((DagligSkæv) ordination);
             } else if (ordination instanceof PN) {
