@@ -47,7 +47,7 @@ public class DagligFast extends Ordination {
     }
 
     @Override
-    public double samletDosis() {
+    public double samletDosis() { // spytter nullpointexept
         int sum = 0;
         for (Dosis dosis : this.dosis) {
             sum += dosis.getAntal();
