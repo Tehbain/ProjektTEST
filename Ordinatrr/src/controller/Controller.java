@@ -25,10 +25,11 @@ public abstract class Controller {
     public static PN opretPNOrdination(LocalDate startDato, LocalDate slutDato, Patient patient, Lægemiddel lægemiddel, double antal) {
         try {
             if (startDato.isAfter(slutDato)) {
-                throw new IllegalArgumentException("Vend lige din dato om, makker.");
+                throw new IllegalArgumentException("Ugyldig dato");
             } else {
                 PN PNret =  new PN(startDato,slutDato,lægemiddel);
                 patient.addOrdination(PNret);
+                // TODO storage skal gemme patienten?
                 return PNret;
 
             }
