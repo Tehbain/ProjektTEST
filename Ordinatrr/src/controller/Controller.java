@@ -180,8 +180,8 @@ public abstract class Controller {
     public static void initStorage() {
         Patient jane = opretPatient("121256-0512", "Jane Jensen", 63.4);
         Patient finn = opretPatient("070985-1153", "Finn Madsen", 83.2);
-        opretPatient("050972-1233", "Hans Jørgensen", 89.4);
-        opretPatient("011064-1522", "Ulla Nielsen", 59.9);
+        opretPatient("050972-1233", "Hans Jørgensen DUMMY", 89.4);
+        opretPatient("011064-1522", "Ulla Nielsen DUMMY", 59.9);
         Patient ib = opretPatient("090149-2529", "Ib Hansen", 87.7);
 
         Lægemiddel acetylsalicylsyre = opretLaegemiddel(
