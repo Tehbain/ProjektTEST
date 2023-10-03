@@ -25,7 +25,7 @@ public abstract class Controller {
     public static PN opretPNOrdination(LocalDate startDato, LocalDate slutDato, Patient patient, Lægemiddel lægemiddel, double antal) {
         try {
             if (startDato.isAfter(slutDato)) {
-                throw new IllegalArgumentException("Ugyldig dato");
+                throw new IllegalArgumentException("Ugyldig dato.");
             } else {
                 PN PNret =  new PN(startDato,slutDato,lægemiddel);
                 patient.addOrdination(PNret);
@@ -51,7 +51,7 @@ public abstract class Controller {
 
         try {
             if (startDato.isAfter(slutDato)) {
-                throw new IllegalArgumentException("Du lader til at have problemer. Prøv igen.");
+                throw new IllegalArgumentException("Ugyldig dato.");
             } else {
                 DagligFast DFret = new DagligFast(startDato,slutDato, lægemiddel);
                 patient.addOrdination(DFret);
@@ -79,10 +79,10 @@ public abstract class Controller {
         try {
 
             if (startDen.isAfter(slutDen)) {
-                throw new IllegalArgumentException("Vi må simpelthen holde op med at mødes på den her måde");
+                throw new IllegalArgumentException("Ugyldig dato.");
             }
             if (klokkeSlet.length != antalEnheder.length) {
-                throw new IllegalArgumentException("Nope");
+                throw new IllegalArgumentException("Antal tidsbrikker og antal enheder stemmer ikke overens.");
             }
             else {
                 DagligSkæv DSret = new DagligSkæv(startDen,slutDen,lægemiddel);
@@ -106,7 +106,7 @@ public abstract class Controller {
         try {
 
             if (dato.isBefore(ordination.getStartDen()) || dato.isAfter(ordination.getSlutDen())) {
-                throw new IllegalArgumentException("Det kan du godt gøre bedre, ik'?");
+                throw new IllegalArgumentException("Udenfor gyldighedsperiode.");
             } else {
                 ordination.givDosis(dato);
             }
