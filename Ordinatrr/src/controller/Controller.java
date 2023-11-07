@@ -53,7 +53,7 @@ public abstract class Controller {
             if (startDato.isAfter(slutDato)) {
                 throw new IllegalArgumentException("Ugyldig dato.");
             } else {
-                DagligFast DFret = new DagligFast(startDato,slutDato, lægemiddel);
+                DagligFast DFret = new DagligFast(startDato,slutDato, lægemiddel, morgenAntal, middagAntal, aftenAntal, natAntal);
                 patient.addOrdination(DFret);
                 return DFret;
             }
@@ -90,8 +90,7 @@ public abstract class Controller {
                 return DSret;
             }
 
-        }catch (IllegalArgumentException e) {
-
+        } catch (IllegalArgumentException e) {
         }
 
         return null;

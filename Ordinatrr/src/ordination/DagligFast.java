@@ -22,13 +22,13 @@ public class DagligFast extends Ordination {
         return dosis;
     }
 
-    public DagligFast(LocalDate startDen, LocalDate slutDen, Lægemiddel lægemiddel) {
-        super(startDen, slutDen, lægemiddel);
-    }
-    public DagligFast(LocalDate startDen, LocalDate slutDen, Lægemiddel lægemiddel, Dosis[] dosis) {
-        super(startDen, slutDen, lægemiddel);
-        this.dosis = dosis;
-    }
+//    public DagligFast(LocalDate startDen, LocalDate slutDen, Lægemiddel lægemiddel) {
+//        super(startDen, slutDen, lægemiddel);
+//    }
+//    public DagligFast(LocalDate startDen, LocalDate slutDen, Lægemiddel lægemiddel, Dosis[] dosis) {
+//        super(startDen, slutDen, lægemiddel);
+//        this.dosis = dosis;
+//    }
 
     public DagligFast(
             LocalDate startDato, LocalDate slutDato, Lægemiddel lægemiddel,

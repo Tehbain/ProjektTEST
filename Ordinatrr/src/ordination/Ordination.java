@@ -22,7 +22,7 @@ public abstract class Ordination {
         return slutDen;
     }
 
-    /** DONE: Returner antal hele dage mellem startdato og slutdato. Begge dage inklusive. */
+    /** Returner antal hele dage mellem startdato og slutdato. Begge dage inklusive. */
     public int antalDage() {
         return (int) ChronoUnit.DAYS.between(startDen, slutDen) + 1;
     }
@@ -32,10 +32,10 @@ public abstract class Ordination {
         return startDen.toString();
     }
 
-    /** DONE: Returner den totale dosis, der er givet i den periode ordinationen er gyldig. */
+    /** Returner den totale dosis, der er givet i den periode ordinationen er gyldig. */
     public abstract double samletDosis();
 
-    /** DONE Returner den gennemsnitlige dosis givet pr dag i den periode, ordinationen er gyldig. */
+    /** Returner den gennemsnitlige dosis givet pr dag i den periode, ordinationen er gyldig. */
     public abstract double doegnDosis();
 
     /** Returner ordinationstypen som en String. */
