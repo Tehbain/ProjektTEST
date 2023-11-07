@@ -28,5 +28,7 @@ public class TestPrompt {
         System.out.println(jane.getOrdinationer());
 
 
+        System.out.println("BREH: " + Controller.opretDagligFastOrdination(LocalDate.now().plusDays(3),LocalDate.now() , jane, storage.getAllLaegemidler().get(1),1,2,3,4));
+
     }
 }

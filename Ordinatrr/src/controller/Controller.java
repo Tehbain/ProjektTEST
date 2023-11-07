@@ -23,20 +23,13 @@ public abstract class Controller {
      * Pre: antal > 0.
      */
     public static PN opretPNOrdination(LocalDate startDato, LocalDate slutDato, Patient patient, Lægemiddel lægemiddel, double antal) {
-        try {
-            if (startDato.isAfter(slutDato)) {
-                throw new IllegalArgumentException("Ugyldig dato.");
-            } else {
-                PN PNret =  new PN(startDato,slutDato,lægemiddel);
-                patient.addOrdination(PNret);
-                // TODO storage skal gemme patienten?
-                return PNret;
-
-            }
-        }catch (IllegalArgumentException e){
+        if (startDato.isAfter(slutDato)) {
+            throw new IllegalArgumentException("Ugyldig dato.");
+        } else {
+            PN PNret = new PN(startDato, slutDato, lægemiddel);
+            if (patient != null) patient.addOrdination(PNret);
+            return PNret;
         }
-
-        return null;
     }
 
     /**
@@ -49,19 +42,13 @@ public abstract class Controller {
             LocalDate startDato, LocalDate slutDato, Patient patient, Lægemiddel lægemiddel,
             double morgenAntal, double middagAntal, double aftenAntal, double natAntal) {
 
-        try {
-            if (startDato.isAfter(slutDato)) {
-                throw new IllegalArgumentException("Ugyldig dato.");
-            } else {
-                DagligFast DFret = new DagligFast(startDato,slutDato, lægemiddel, morgenAntal, middagAntal, aftenAntal, natAntal);
-                patient.addOrdination(DFret);
-                return DFret;
-            }
-
-        } catch (IllegalArgumentException e) {
+        if (startDato.isAfter(slutDato)) {
+            throw new IllegalArgumentException("Ugyldig dato.");
+        } else {
+            DagligFast DFret = new DagligFast(startDato,slutDato, lægemiddel, morgenAntal, middagAntal, aftenAntal, natAntal);
+            if (patient != null) patient.addOrdination(DFret);
+            return DFret;
         }
-
-        return null;
     }
 
     /**
@@ -76,24 +63,19 @@ public abstract class Controller {
             LocalDate startDen, LocalDate slutDen, Patient patient, Lægemiddel lægemiddel,
             LocalTime[] klokkeSlet, double[] antalEnheder) {
 
-        try {
 
-            if (startDen.isAfter(slutDen)) {
-                throw new IllegalArgumentException("Ugyldig dato.");
-            }
-            if (klokkeSlet.length != antalEnheder.length) {
-                throw new IllegalArgumentException("Antal tidsbrikker og antal enheder stemmer ikke overens.");
-            }
-            else {
-                DagligSkæv DSret = new DagligSkæv(startDen,slutDen,lægemiddel);
-                patient.addOrdination(DSret);
-                return DSret;
-            }
 
-        } catch (IllegalArgumentException e) {
+        if (startDen.isAfter(slutDen)) {
+            throw new IllegalArgumentException("Ugyldig dato.");
         }
-
-        return null;
+        if (klokkeSlet.length != antalEnheder.length) {
+            throw new IllegalArgumentException("Antal tidsbrikker og antal enheder stemmer ikke overens.");
+        }
+        else {
+            DagligSkæv DSret = new DagligSkæv(startDen,slutDen,lægemiddel);
+            if (patient != null) patient.addOrdination(DSret);
+            return DSret;
+        }
     }
 
     /**
@@ -104,7 +86,7 @@ public abstract class Controller {
     public static void ordinationPNAnvendt(PN ordination, LocalDate dato) {
         try {
 
-            if (dato.isBefore(ordination.getStartDen()) || dato.isAfter(ordination.getSlutDen())) {
+            if (dato.isBefore(ordination.getStartDen()) || dato.isAfter(ordination.getSlutDen()) || dato == null) {
                 throw new IllegalArgumentException("Udenfor gyldighedsperiode.");
             } else {
                 ordination.givDosis(dato);

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class PN extends Ordination {
     private double antalEnheder;
-    private ArrayList<LocalDate> givetDato; //For PN-ordinationer skal man gemme alle tidspunkter (datoer) for, hvornår ordinationen er givet.
+    private final ArrayList<LocalDate> givetDato = new ArrayList<>(); //For PN-ordinationer skal man gemme alle tidspunkter (datoer) for, hvornår ordinationen er givet.
     private int antalGangeGivet;
 
     public PN(LocalDate startDen, LocalDate slutDen, Lægemiddel lægemiddel) {
