@@ -1,6 +1,7 @@
 package ordination;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 /*
@@ -25,7 +26,7 @@ public class PN extends Ordination {
      */
     public boolean givDosis(LocalDate givesDen) {
         boolean godkendt = false;
-        if (givesDen.isAfter(super.getStartDen()) && givesDen.isBefore(super.getSlutDen())) {
+        if (givesDen.isAfter(super.getStartDen().minusDays(1)) && givesDen.isBefore(super.getSlutDen().plusDays(1))) {
             givetDato.add(givesDen);
             antalGangeGivet++;
             godkendt = true;

@@ -84,17 +84,13 @@ public abstract class Controller {
      * kastes en IllegalArgumentException.
      */
     public static void ordinationPNAnvendt(PN ordination, LocalDate dato) {
-        try {
 
-            if (dato.isBefore(ordination.getStartDen()) || dato.isAfter(ordination.getSlutDen()) || dato == null) {
-                throw new IllegalArgumentException("Udenfor gyldighedsperiode.");
-            } else {
-                ordination.givDosis(dato);
-            }
-
-        }catch (IllegalArgumentException e) {
-
+        if (dato == null || dato.isBefore(ordination.getStartDen()) || dato.isAfter(ordination.getSlutDen())) {
+            throw new IllegalArgumentException("Udenfor gyldighedsperiode.");
+        } else {
+            ordination.givDosis(dato);
         }
+
     }
 
     /**
@@ -108,7 +104,7 @@ public abstract class Controller {
 
         if (vægt < 25) {
             return lægemiddel.getEnhedPrKgPrDoegnLet();
-        } else if (vægt > 120) {
+        } else if (vægt >= 120) {
             return lægemiddel.getEnhedPrKgPrDoegnTung();
         } else return lægemiddel.getEnhedPrKgPrDoegnNormal();
 
